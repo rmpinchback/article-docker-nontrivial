@@ -1,0 +1,14 @@
+- name: provision vm
+  hosts: all
+  become: true
+  tasks:
+    - name: easy-task
+      shell: uname -a
+
+    # if following article part 2, uncomment the two lines below to activate docker provisioning
+    #- name: docker-provision
+    #  include: docker-setup.yml
+
+    # if following article part 2, uncomment the two lines below to activate docker compose provisioning
+    #- name: docker-compose-provision
+    #  include: docker-compose-setup.yml

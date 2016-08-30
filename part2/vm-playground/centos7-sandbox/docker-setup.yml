@@ -1,0 +1,12 @@
+# common provisioning tasks for docker
+
+- name: docker-install
+  # installs the docker repo and docker
+  #
+  # this is one of two ways the docker team provides for current versions;
+  # from a security standpoint I dislike it but it is convenient as a short-term learning device
+  shell: curl -fsSL https://get.docker.com/ | sh
+
+- name: docker-service
+  # enables and starts the service
+  service: name=docker.service enabled=yes state=started

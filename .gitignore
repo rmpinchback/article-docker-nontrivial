@@ -1,0 +1,7 @@
+# -*- mode: gitignore; -*-
+# ignore JetBrains-generated files
+.idea/
+# ignore Vagrant-generated files
+.vagrant/
+# ignore Emacs/Vi/Vim backup files
+*~

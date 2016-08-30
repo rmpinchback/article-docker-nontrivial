@@ -1,0 +1,32 @@
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+  # retrieve the box from https://atlas.hashicorp.com/centos/boxes/7
+  config.vm.box = "centos/7"
+
+  # don't bother with checking for box updates in the future
+  config.vm.box_check_update = false
+
+  # redefine the default synced_folder to use type 'virtualbox' so it works on non-Unixy hosts
+  config.vm.synced_folder ".", "/home/vagrant/sync", type: "virtualbox", :mount_options => ["rw"], owner: "vagrant", group: "vagrant"
+
+  # give the sandbox some local networking details, alter as needed to avoid conflicts with your local environment
+  #
+  # don't worry, 192.168.BLAH.BLAH won't map to anything in the outside world; just don't use 192.168.BLAH.1
+  # or you'll more be prone to accidentally corresponding with the IP that your router exposes to you
+  config.vm.hostname = "nontrivial.sandbox.org"
+  config.vm.network "private_network", ip: "192.168.100.10"
+
+  # put in the Ansible provisioning hooks
+  #
+  # if you are following article part 2, remove the '=begin' and '=end' lines below when told to enable provisioning
+=begin
+  config.vm.provision "ansible_local" do |ansible|
+    ansible.playbook = "nontrivial-provisioning.yml"
+    ansible.provisioning_path = "/home/vagrant/sync"
+    ansible.verbose = "v"
+  end
+=end
+
+end
