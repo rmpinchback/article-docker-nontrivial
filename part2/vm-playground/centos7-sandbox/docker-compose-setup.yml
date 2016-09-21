@@ -1,6 +1,6 @@
 # common provisioning tasks for docker compose
 
-- name: docker-install
+- name: docker-compose-install
   # installs the script
   #
   # examples from the docker team install this in /usr/local/bin but that's inconvenient and frankly
